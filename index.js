@@ -1,3 +1,24 @@
+const projectsData = [
+  {
+    "title": "Sophie Bluel (OpenClassRooms project)",
+    "description": "My role in this project was to transform the HTML5 codes that were provided to me into Javascript, define the Login routes, retrieve data from the api and send new data, set up the layout based on whether or not the user was authenticated.",
+    "github": "https://github.com/Omar-Belalami/Sophie_Bluel",
+    "url": "https://github.com/Omar-Belalami/Sophie_Bluel"
+  },
+  {
+    "title": "Nina Carducci (OpenClassRooms project)",
+    "description": "My role in this project was to improve the site. Specifically, maximizing all SEO, accessibility and Best Practices parameters.",
+    "url": "https://omar-belalami.github.io/Nina-Carducci/",
+    "github": "https://github.com/Omar-Belalami/Nina-Carducci"
+  },
+  {
+    "title": "Argent Bank (OpenClassRooms project)",
+    "description": "My role in this project was to implement Redux to manage the state of a banking application, create login logout logics, manage username changes, user data security, green code compliance, and create new possible ways for the Backend team to be able to manage transactions.",
+    "github": "https://github.com/Omar-Belalami/Argent-Bank",
+    "url": "https://github.com/Omar-Belalami/Argent-Bank"
+  }
+];
+
 // Ici on trouve un menu pour naviguer dans le site.
 function Header() {
     const header = document.createElement('header');
@@ -46,13 +67,58 @@ function Header() {
   }
   
   // Ici on aurait les projets
-  function Projects(projects) {
+  function Projects(projectsData) {
     const projectsSection = document.createElement('section');
-    projectsSection.className = 'projects-container';
+
+    const projectsList = document.createElement('ul');
   
+    projectsData.forEach(item => {
+      const projectCard = document.createElement('li');
+  
+      const projectDetails = document.createElement('div');
+      projectDetails.style.width = '100%';
+  
+      const title = document.createElement('h2');
+      title.textContent = item.title;
+  
+      const description = document.createElement('p');
+      description.textContent = item.description;
+  
+      const buttonsContainer = document.createElement('div');
+  
+      const seeProjectButton = createButton('See Project', item.url);
+      const sourceCodeButton = createButton('Source Code', item.github);
+  
+      buttonsContainer.appendChild(seeProjectButton);
+      buttonsContainer.appendChild(sourceCodeButton);
+  
+      projectDetails.appendChild(title);
+      projectDetails.appendChild(description);
+      projectDetails.appendChild(buttonsContainer);
+      projectCard.appendChild(projectDetails);
+  
+      projectsList.appendChild(projectCard);
+    });
+  
+    projectsSection.appendChild(projectsList);
   
     return projectsSection;
   }
+  
+  function createButton(text, link) {
+    const buttonLink = document.createElement('a');
+    buttonLink.href = link;
+    buttonLink.target = '_blank';
+    buttonLink.rel = 'noreferrer';
+  
+    const buttonText = document.createElement('span');
+    buttonText.textContent = text;
+  
+    buttonLink.appendChild(buttonText);
+  
+    return buttonLink;
+  }
+  
   
   // Form de contact (mail)
 function Contact() {
@@ -148,13 +214,15 @@ function Contact() {
 }
 
   
-  const appDiv = document.getElementById('app');
-  appDiv.appendChild(Header());
-  appDiv.appendChild(Welcome());
-  appDiv.appendChild(Info());
-  const projectsData = [
-    { id: 1, name: 'Project 1', description: 'Description 1', html_url: '#' },
-  ];
-  appDiv.appendChild(Projects(projectsData));
-  appDiv.appendChild(Contact());
+const appDiv = document.getElementById('app');
+
+appDiv.appendChild(Header());
+appDiv.appendChild(Welcome());
+appDiv.appendChild(Info());
+
+const projectsContainer = document.createElement('div');
+projectsContainer.appendChild(Projects(projectsData));
+appDiv.appendChild(projectsContainer);
+appDiv.appendChild(Contact());
+
   
