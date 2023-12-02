@@ -1,3 +1,13 @@
+const competencies = [
+  { name: 'JavaScript', iconClass: 'fa-brands fa-js', text: 'JavaScript' },
+  { name: 'React', iconClass: 'fa-brands fa-react', text: 'React.js' },
+  { name: 'HTML5', iconClass: 'fa-brands fa-html5', text: 'HTML5' },
+  { name: 'CSS3', iconClass: 'fa-brands fa-css3-alt', text: 'CSS3' },
+  { name: 'Git', iconClass: 'fa-brands fa-git' },
+  {  text: 'REDUX' },
+  {  text: 'SEO' }
+];
+
 const projectsData = [
   {
     "title": "Sophie Bluel (OpenClassRooms project)",
@@ -58,52 +68,106 @@ function Header() {
     return welcomeSection;
   }
   
-  function Info() {
-    const infoSection = document.createElement('section');
-    infoSection.className = 'apropos-container';
   
-  
-    return infoSection;
-  }
-  
-  // Ici on aurait les projets
-  function Projects(projectsData) {
-    const projectsSection = document.createElement('section');
 
-    const projectsList = document.createElement('ul');
+function Info() {
+  const infoSection = document.createElement('section');
+  infoSection.className = 'apropos-container';
+
+  const titleInfo = document.createElement('h3');
+  titleInfo.textContent = 'About me';
+
+  const subtitleInfo = document.createElement('p');
+  subtitleInfo.textContent = "What I love about my job is translating creative ideas into functional, modern web solutions.";
+
+  const titleCompetence = document.createElement('h4');
+  titleCompetence.textContent = 'My skills:';
+
+  const competenceList = document.createElement('ul');
+  competenceList.className = 'competence-list';
+
+  competencies.forEach(competency => {
+    const listItem = document.createElement('li');
+    const icon = document.createElement('i');
+    icon.className = `fa ${competency.iconClass}`;
+
+    const competencyText = document.createElement('span');
+    competencyText.textContent = competency.text;
+
+    listItem.appendChild(icon);
+    listItem.appendChild(competencyText);
+    competenceList.appendChild(listItem);
+  });
+
+  infoSection.appendChild(titleInfo);
+  infoSection.appendChild(subtitleInfo);
+  infoSection.appendChild(titleCompetence);
+  infoSection.appendChild(competenceList);
+
+  return infoSection;
+}  
   
-    projectsData.forEach(item => {
-      const projectCard = document.createElement('li');
-  
-      const projectDetails = document.createElement('div');
-      projectDetails.style.width = '100%';
-  
-      const title = document.createElement('h2');
-      title.textContent = item.title;
-  
-      const description = document.createElement('p');
-      description.textContent = item.description;
-  
-      const buttonsContainer = document.createElement('div');
-  
-      const seeProjectButton = createButton('See Project', item.url);
-      const sourceCodeButton = createButton('Source Code', item.github);
-  
-      buttonsContainer.appendChild(seeProjectButton);
-      buttonsContainer.appendChild(sourceCodeButton);
-  
-      projectDetails.appendChild(title);
-      projectDetails.appendChild(description);
-      projectDetails.appendChild(buttonsContainer);
-      projectCard.appendChild(projectDetails);
-  
-      projectsList.appendChild(projectCard);
-    });
-  
-    projectsSection.appendChild(projectsList);
-  
-    return projectsSection;
-  }
+
+ // Ici on aurait les projets et le liens pour mon GitHub.
+function Projects(projectsData) {
+  const projectsSection = document.createElement('section');
+  projectsSection.className = 'projects-container';
+  const titleProjects = document.createElement('h2');
+  titleProjects.textContent = 'Mes projets!';
+
+  const projectsList = document.createElement('ul');
+
+  projectsData.forEach(item => {
+    const projectCard = document.createElement('li');
+
+    const projectDetails = document.createElement('div');
+    projectDetails.style.width = '100%';
+
+    const title = document.createElement('h2');
+    title.textContent = item.title;
+
+    const description = document.createElement('p');
+    description.textContent = item.description;
+
+    const buttonsContainer = document.createElement('div');
+
+    const sourceCodeButton = createButton('Source Code', item.github);
+
+    buttonsContainer.appendChild(sourceCodeButton);
+
+    projectDetails.appendChild(title);
+    projectDetails.appendChild(description);
+    projectDetails.appendChild(buttonsContainer);
+
+    projectCard.appendChild(projectDetails);
+    projectsList.appendChild(projectCard);
+  });
+
+  projectsSection.appendChild(titleProjects);
+  projectsSection.appendChild(projectsList);
+
+  const githubContainer = document.createElement('div');
+ githubContainer.className = 'github-container';
+
+  const seeMoreSpan = document.createElement('span');
+  seeMoreSpan.textContent = 'See More:';
+
+  const githubIcon = document.createElement('i');
+  githubIcon.className = 'fa-brands fa-github';
+
+  const githubLink = document.createElement('a');
+  githubLink.href = 'https://github.com/Omar-Belalami';
+  githubLink.target = '_blank';
+  githubLink.rel = 'noreferrer';
+  githubLink.appendChild(githubIcon);
+
+  githubContainer.appendChild(seeMoreSpan);
+  githubContainer.appendChild(githubLink);
+  projectsSection.appendChild(githubContainer);
+
+  return projectsSection;
+}
+
   
   function createButton(text, link) {
     const buttonLink = document.createElement('a');
