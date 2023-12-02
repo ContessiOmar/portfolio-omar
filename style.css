@@ -1,3 +1,7 @@
+body {
+  overflow-x: hidden;
+}
+
 .welcome-container {
   display: flex;
   flex-direction: column;
@@ -202,4 +206,14 @@ button {
 
 button:hover {
   background-color: #2980b9;
+}
+
+@media (max-width: 768px) {
+  body {
+      text-align: center;
+  }
+
+  .projects-container ul{
+    padding: 0;
+  }
 }
