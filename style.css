@@ -208,6 +208,10 @@ button:hover {
   background-color: #2980b9;
 }
 
+.error-message {
+  color: black;
+}
+
 @media (max-width: 768px) {
   body {
       text-align: center;
