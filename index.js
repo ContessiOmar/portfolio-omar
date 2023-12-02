@@ -31,29 +31,32 @@ const projectsData = [
 
 // Ici on trouve un menu pour naviguer dans le site.
 function Header() {
-    const header = document.createElement('header');
-    const nav = document.createElement('nav');
-    const ul = document.createElement('ul');
+  const header = document.createElement('header');
+  const nav = document.createElement('nav');
+  const ul = document.createElement('ul');
   
-    const menuItems = ['About Me', 'Projects', 'Contact'];
+  const menuItems = ['About Me', 'Projects', 'Services', 'Contact'];
   
-    menuItems.forEach(item => {
-      const li = document.createElement('li');
-      const a = document.createElement('a');
-      a.textContent = item;
-      li.appendChild(a);
-      ul.appendChild(li);
-    });
+  menuItems.forEach(item => {
+    const li = document.createElement('li');
+    const a = document.createElement('a');
+    a.textContent = item;
+    a.href = `#${item.toLowerCase().replace(' ', '-')}`;
+    li.appendChild(a);
+    ul.appendChild(li);
+  });
   
-    nav.appendChild(ul);
-    header.appendChild(nav);
+  nav.appendChild(ul);
+  header.appendChild(nav);
   
-    return header;
-  }
+  return header;
+}
+
   
   // Intro du site
   function Welcome() {
     const welcomeSection = document.createElement('section');
+    welcomeSection.id = 'Welcome';
     welcomeSection.className = 'welcome-container';
   
     const h2 = document.createElement('h2');
@@ -72,11 +75,13 @@ function Header() {
 
 function Info() {
   const infoSection = document.createElement('section');
+ infoSection.id = 'about-me';
   infoSection.className = 'apropos-container';
 
   const titleInfo = document.createElement('h3');
   titleInfo.textContent = 'About me';
-
+ const studyInfo = document.createElement('p');
+ studyInfo.textContent = 'I studied at OpenClassRooms, where I learned the art of Front End programming and acquired my skills.';
   const subtitleInfo = document.createElement('p');
   subtitleInfo.textContent = "What I love about my job is translating creative ideas into functional, modern web solutions.";
 
@@ -100,6 +105,7 @@ function Info() {
   });
 
   infoSection.appendChild(titleInfo);
+  infoSection.appendChild(studyInfo);
   infoSection.appendChild(subtitleInfo);
   infoSection.appendChild(titleCompetence);
   infoSection.appendChild(competenceList);
@@ -107,13 +113,42 @@ function Info() {
   return infoSection;
 }  
   
+function MyServices() {
+  const servicesSection = document.createElement('section');
+  servicesSection.id = 'services';
+  servicesSection.className = 'services-container';
+
+  const titleServices = document.createElement('h2');
+  titleServices.textContent = 'My Services';
+
+  const servicesList = document.createElement('ul');
+  servicesList.className = 'services-list';
+
+  const services = [
+    "Development of responsive user interfaces",
+    "Development of high-performance web applications",
+    "Optimizing performance and user experience",
+  ];
+
+  services.forEach(service => {
+    const listItem = document.createElement('li');
+    listItem.textContent = service;
+    servicesList.appendChild(listItem);
+  });
+
+  servicesSection.appendChild(titleServices);
+  servicesSection.appendChild(servicesList);
+
+  return servicesSection;
+}
 
  // Ici on aurait les projets et le liens pour mon GitHub.
 function Projects(projectsData) {
   const projectsSection = document.createElement('section');
+ projectsSection.id = 'projects';
   projectsSection.className = 'projects-container';
   const titleProjects = document.createElement('h2');
-  titleProjects.textContent = 'Mes projets!';
+  titleProjects.textContent = 'My projects:';
 
   const projectsList = document.createElement('ul');
 
@@ -187,7 +222,13 @@ function Projects(projectsData) {
   // Form de contact (mail)
 function Contact() {
   const contactSection = document.createElement('section');
+  contactSection.id = 'contact';
   contactSection.className = 'contact-container';
+
+  const contactTitle = document.createElement('h3');
+  contactTitle.textContent = 'Contact Me!'
+
+  contactSection.appendChild(contactTitle);
 
   const form = document.createElement('form');
   form.addEventListener('submit', handleSubmit);
@@ -283,6 +324,7 @@ const appDiv = document.getElementById('app');
 appDiv.appendChild(Header());
 appDiv.appendChild(Welcome());
 appDiv.appendChild(Info());
+appDiv.appendChild(MyServices());
 
 const projectsContainer = document.createElement('div');
 projectsContainer.appendChild(Projects(projectsData));
