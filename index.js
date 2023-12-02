@@ -35,7 +35,7 @@ function Header() {
   const nav = document.createElement('nav');
   const ul = document.createElement('ul');
   
-  const menuItems = ['About Me', 'Projects', 'Services', 'Contact'];
+  const menuItems = ['About', 'Projects', 'Services', 'Contact'];
   
   menuItems.forEach(item => {
     const li = document.createElement('li');
@@ -75,7 +75,7 @@ function Header() {
 
 function Info() {
   const infoSection = document.createElement('section');
- infoSection.id = 'about-me';
+ infoSection.id = 'about';
   infoSection.className = 'apropos-container';
 
   const titleInfo = document.createElement('h3');
